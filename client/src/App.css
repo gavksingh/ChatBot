@@ -1,0 +1,30 @@
+/* client/src/App.css */
+.App {
+  text-align: center;
+}
+
+form {
+  margin-bottom: 10px;
+}
+
+input {
+  padding: 10px;
+  margin-right: 10px;
+  width: 300px;
+}
+
+button {
+  padding: 10px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  background: #eee;
+  margin-bottom: 5px;
+  padding: 10px;
+  text-align: left;
+}
