@@ -8,6 +8,9 @@
       { "src": "/socket.io/(.*)", "dest": "/server.js" },
       { "src": "/api/(.*)", "dest": "/server.js" },
       { "src": "/(.*)", "dest": "/client/build/$1" }
-    ]
+    ],
+    "env": {
+      "NODE_OPTIONS": "--openssl-legacy-provider"
+    }
   }
   
