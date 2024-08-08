@@ -1,4 +1,3 @@
-// server.js
 const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
@@ -15,27 +14,32 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
-const responses = {
-  'hello': 'Hello! How can I help you?',
-  'hi': 'Hi there! What can I do for you today?',
-  'help': 'I am here to assist you. What do you need help with?',
-  'bye': 'Goodbye! Have a great day!',
-  'thanks': 'You\'re welcome!'
-};
-
 io.on('connection', (socket) => {
   console.log('a user connected');
-  
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
-
   socket.on('chat message', (msg) => {
-    const response = responses[msg.toLowerCase()] || 'I am just a basic bot. Please say hello.';
-    io.emit('chat message', response);
+    console.log('message: ' + msg);
+    if (msg.toLowerCase() === 'hello') {
+      io.emit('chat message', 'Hello! How can I help you?');
+    } else if (msg.toLowerCase() === 'bye') {
+      io.emit('chat message', 'Goodbye!');
+    } else if (msg.toLowerCase() === 'how are you?') {
+      io.emit('chat message', 'I am just a bot, but I am doing fine!');
+    } else if (msg.toLowerCase() === 'help') {
+      io.emit('chat message', 'How can I assist you?');
+    } else if (msg.toLowerCase() === 'time') {
+      io.emit('chat message', `The current time is ${new Date().toLocaleTimeString()}`);
+    } else if (msg.toLowerCase() === 'date') {
+      io.emit('chat message', `Today's date is ${new Date().toLocaleDateString()}`);
+    } else {
+      io.emit('chat message', 'I am just a basic bot. Please say hello.');
+    }
   });
 });
 
-server.listen(3000, () => {
-  console.log('listening on *:3000');
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+  console.log(`listening on *:${PORT}`);
 });
